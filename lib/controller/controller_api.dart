@@ -55,7 +55,7 @@ class ApiController extends GetxController {
   Future<void> deleteData(String id) async {
     try {
       final dio = Dio();
-      final response = await dio.delete(baseUrl + endPoint + "/$id");
+      final response = await dio.delete("$baseUrl$endPoint/$id");
       if (response.statusCode == 200) {
         Get.snackbar(
           "Success",
@@ -79,7 +79,26 @@ class ApiController extends GetxController {
         "$baseUrl$endPoint/${studentModel.id}",
         data: studentModel.toJson(),
       );
+      if (response.statusCode == 200) {
+        Get.snackbar(
+          "Success",
+          "Data berhasil diupdate",
+          backgroundColor: Colors.green,
+        );
+        getData();
+      } else {
+        Get.snackbar(
+          "Error",
+          "Gagal memperbarui data, status code ${response.statusCode}",
+          backgroundColor: Colors.red,
+        );
+      }
     } catch (err) {
+      Get.snackbar(
+        "Error",
+        "Terjadi kesalahan saat memperbarui data",
+        backgroundColor: Colors.red,
+      );
       print(err);
     }
   }

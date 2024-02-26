@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:student_api/controller/controller_api.dart';
 import 'package:student_api/models/model_student.dart';
 
 class ScreenUpdateData extends StatelessWidget {
-  //parameter
   final String id;
   final String name;
   final String nim;
@@ -12,6 +11,7 @@ class ScreenUpdateData extends StatelessWidget {
   final String faculty;
 
   ScreenUpdateData({
+    super.key,
     required this.id,
     required this.name,
     required this.nim,
@@ -19,7 +19,7 @@ class ScreenUpdateData extends StatelessWidget {
     required this.faculty,
   });
 
-  final apiController = Get.find();
+  final ApiController apiController = Get.find();
   final TextEditingController namaController = TextEditingController();
   final TextEditingController nimController = TextEditingController();
   final TextEditingController photoController = TextEditingController();
@@ -27,10 +27,20 @@ class ScreenUpdateData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    namaController.text = name;
+    nimController.text = nim;
+    photoController.text = photo;
+    facultyController.text = faculty;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add student daata"),
-        backgroundColor: Colors.amber,
+        title: const Text(
+          "Update student data",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -79,27 +89,25 @@ class ScreenUpdateData extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: Colors.blue,
               ),
               onPressed: () async {
-                Get.dialog(
-                  const Center(
-                    child: CircularProgressIndicator(),
+                await apiController.updateData(
+                  StudentModel(
+                    id: id,
+                    nama: namaController.text,
+                    nim: nimController.text,
+                    photo: photoController.text,
+                    faculty: facultyController.text,
                   ),
                 );
-                StudentModel newStudent = StudentModel(
-                  nama: namaController.text,
-                  nim: nimController.text,
-                  photo: photoController.text,
-                  faculty: facultyController.text,
-                );
-                await apiController.postData(newStudent);
-                // Get.back();
-                // await Future.delayed(Duration(milliseconds: 400));
-                // Get.back();
-                apiController.getData();
               },
-              child: const Text("Add data"),
+              child: const Text(
+                "Update data",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),
