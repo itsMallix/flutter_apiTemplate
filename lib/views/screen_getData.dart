@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_api/controller/controller_api.dart';
 import 'package:student_api/views/screen_postData.dart';
+import 'package:student_api/views/screen_updateData.dart';
 
 class ScreenGetData extends StatelessWidget {
   final ApiController apiController = Get.find();
@@ -10,8 +11,11 @@ class ScreenGetData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Get student data"),
-        backgroundColor: Colors.amber,
+        title: const Text(
+          "Get student data",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blue,
       ),
       body: Obx(
         () => ListView.builder(
@@ -24,6 +28,17 @@ class ScreenGetData extends StatelessWidget {
               );
             } else {
               return ListTile(
+                onTap: () {
+                  Get.to(
+                    ScreenUpdateData(
+                      id: apiController.studentData[index].id!,
+                      name: apiController.studentData[index].nama!,
+                      nim: apiController.studentData[index].nim!,
+                      photo: apiController.studentData[index].photo!,
+                      faculty: apiController.studentData[index].faculty!,
+                    ),
+                  );
+                },
                 title: Text(apiController.studentData[index].nama!),
                 leading: CircleAvatar(
                   child: ClipRRect(
@@ -53,6 +68,7 @@ class ScreenGetData extends StatelessWidget {
                             apiController.deleteData(
                               apiController.studentData[index].id!,
                             );
+                            Get.back();
                           },
                           child: const Text("Yes"),
                         ),
@@ -77,11 +93,14 @@ class ScreenGetData extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.blue,
         onPressed: () {
           Get.to(() => ScreenPostData());
         },
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

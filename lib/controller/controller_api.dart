@@ -60,12 +60,25 @@ class ApiController extends GetxController {
         Get.snackbar(
           "Success",
           "Data berhasil dihapus",
+          backgroundColor: Colors.green,
         );
         const CircularProgressIndicator();
         getData();
       } else {
         print("data gagal dihapus, status code ${response.statusCode}");
       }
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  Future<void> updateData(StudentModel studentModel) async {
+    try {
+      final dio = Dio();
+      final response = await dio.put(
+        "$baseUrl$endPoint/${studentModel.id}",
+        data: studentModel.toJson(),
+      );
     } catch (err) {
       print(err);
     }

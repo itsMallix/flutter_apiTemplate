@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:student_api/controller/controller_api.dart';
 import 'package:student_api/models/model_student.dart';
 
-class ScreenPostData extends StatelessWidget {
-  final ApiController apiController = Get.find();
+class ScreenUpdateData extends StatelessWidget {
+  //parameter
+  final String id;
+  final String name;
+  final String nim;
+  final String photo;
+  final String faculty;
 
+  ScreenUpdateData({
+    required this.id,
+    required this.name,
+    required this.nim,
+    required this.photo,
+    required this.faculty,
+  });
+
+  final apiController = Get.find();
   final TextEditingController namaController = TextEditingController();
   final TextEditingController nimController = TextEditingController();
   final TextEditingController photoController = TextEditingController();
@@ -15,16 +29,8 @@ class ScreenPostData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.white,
-        ),
-        title: const Text(
-          "Add student daata",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.blue,
+        title: const Text("Add student daata"),
+        backgroundColor: Colors.amber,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -73,7 +79,7 @@ class ScreenPostData extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.amber,
               ),
               onPressed: () async {
                 Get.dialog(
@@ -93,12 +99,7 @@ class ScreenPostData extends StatelessWidget {
                 // Get.back();
                 apiController.getData();
               },
-              child: const Text(
-                "Add data",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
+              child: const Text("Add data"),
             ),
           ],
         ),
