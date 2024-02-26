@@ -80,11 +80,32 @@ class ScreenGetData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("nim : ${apiController.studentData[index].nim!}"),
-                    const Spacer(),
+                    const Icon(
+                      Icons.school_rounded,
+                      size: 15,
+                      color: Colors.blue,
+                    ),
+                    const SizedBox(width: 5),
                     Text(
-                        "faculty : ${apiController.studentData[index].faculty!}"),
+                      apiController.studentData[index].nim!,
+                    ),
                     const Spacer(),
+                    const Icon(Icons.home_work_rounded,
+                        size: 15, color: Colors.blue),
+                    const SizedBox(width: 5),
+                    Text(
+                      apiController.studentData[index].faculty!,
+                    ),
+                    const Spacer(),
+                    // const Icon(
+                    //   Icons.phone,
+                    //   size: 15,
+                    //   color: Colors.blue,
+                    // ),
+                    // const SizedBox(width: 5),
+                    // Text(
+                    //   "${apiController.studentData[index].phone!}",
+                    // )
                   ],
                 ),
               );
