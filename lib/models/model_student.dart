@@ -10,16 +10,18 @@ class StudentModel {
   DateTime? createdAt;
   String? nama;
   String? nim;
-  String? gpa;
+  String? phone;
   String? faculty;
+  String? photo;
   String? id;
 
   StudentModel({
     this.createdAt,
     this.nama,
     this.nim,
-    this.gpa,
+    this.phone,
     this.faculty,
+    this.photo,
     this.id,
   });
 
@@ -29,8 +31,9 @@ class StudentModel {
             : DateTime.parse(json["createdAt"]),
         nama: json["nama"],
         nim: json["nim"],
-        gpa: json["gpa"],
+        phone: json["phone"],
         faculty: json["faculty"],
+        photo: json["photo"],
         id: json["id"],
       );
 
@@ -38,8 +41,9 @@ class StudentModel {
         "createdAt": createdAt?.toIso8601String(),
         "nama": nama,
         "nim": nim,
-        "gpa": gpa,
+        "phone": phone,
         "faculty": faculty,
+        "photo": photo,
         "id": id,
       };
 }

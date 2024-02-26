@@ -8,7 +8,7 @@ class ScreenPostData extends StatelessWidget {
 
   final TextEditingController namaController = TextEditingController();
   final TextEditingController nimController = TextEditingController();
-  final TextEditingController gpaController = TextEditingController();
+  final TextEditingController photoController = TextEditingController();
   final TextEditingController facultyController = TextEditingController();
 
   @override
@@ -54,12 +54,12 @@ class ScreenPostData extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextField(
-              controller: gpaController,
+              controller: photoController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                hintText: "Gpa",
+                hintText: "Photo",
               ),
             ),
             const SizedBox(height: 10),
@@ -76,7 +76,7 @@ class ScreenPostData extends StatelessWidget {
                 StudentModel newStudent = StudentModel(
                   nama: namaController.text,
                   nim: nimController.text,
-                  gpa: gpaController.text,
+                  photo: photoController.text,
                   faculty: facultyController.text,
                 );
                 await apiController.postData(newStudent);

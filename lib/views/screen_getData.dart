@@ -25,6 +25,41 @@ class ScreenGetData extends StatelessWidget {
             } else {
               return ListTile(
                 title: Text(apiController.studentData[index].nama!),
+                leading: CircleAvatar(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      image:
+                          NetworkImage(apiController.studentData[index].photo!),
+                    ),
+                  ),
+                ),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: "Hapus Data",
+                      middleText:
+                          "Apakah anda yakin ingin menghapus data ini ?",
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text("No"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            apiController.deleteData(
+                              apiController.studentData[index].id!,
+                            );
+                          },
+                          child: const Text("Yes"),
+                        ),
+                      ],
+                    );
+                  },
+                ),
                 subtitle: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,8 +69,6 @@ class ScreenGetData extends StatelessWidget {
                     Text(
                         "faculty : ${apiController.studentData[index].faculty!}"),
                     const Spacer(),
-                    Text(
-                        "gpa : ${apiController.studentData[index].gpa!.toString()}"),
                   ],
                 ),
               );

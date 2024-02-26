@@ -51,4 +51,23 @@ class ApiController extends GetxController {
       print(err);
     }
   }
+
+  Future<void> deleteData(String id) async {
+    try {
+      final dio = Dio();
+      final response = await dio.delete(baseUrl + endPoint + "/$id");
+      if (response.statusCode == 200) {
+        Get.snackbar(
+          "Success",
+          "Data berhasil dihapus",
+        );
+        const CircularProgressIndicator();
+        getData();
+      } else {
+        print("data gagal dihapus, status code ${response.statusCode}");
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
 }
