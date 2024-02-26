@@ -83,7 +83,7 @@ class ScreenUpdateData extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                hintText: "Photo",
+                hintText: "Url Photo",
               ),
             ),
             const SizedBox(height: 10),
